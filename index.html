@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Tracker</title>
+
+    <!-- Font Added -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind + DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+              font-family: "Geist", sans-serif;
+        }
+
+        
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <section id="login-page" class="flex items-center justify-center min-h-screen">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center border border-gray-100">
+            <img src="./assets/github-logo.png" alt="Logo" class="w-20 mx-auto mb-4">
+            <h1 class="text-2xl font-bold text-gray-800">GitHub Issues Tracker</h1>
+            <p class="text-gray-500 mb-6 text-sm">Sign in to manage your issues</p>
+            
+            <div class="space-y-4 text-left">
+                <div>
+                    <label class="label text-sm font-semibold">Username</label>
+                    <input type="text" id="username" placeholder="Enter Username" class="input input-bordered w-full" value="admin">
+                    <span class="text-xs text-blue-600">Default: admin</span>
+                </div>
+                <div>
+                    <label class="label text-sm font-semibold">Password</label>
+                    <input type="password" id="password" placeholder="Enter Password" class="input input-bordered w-full" value="admin123">
+                    <span class="text-xs text-blue-600">Default: admin123</span>
+                </div>
+                <button onclick="handleLogin()" class="btn bg-indigo-600 hover:bg-indigo-700 text-white w-full border-none">Sign In</button>
+            </div>
+            
+            <div class="divider text-xs text-gray-400">OR</div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <p class="text-xs text-gray-500 mb-1">Demo Credentials:</p>
+                <p class="text-sm font-bold">Username: admin</p>
+                <p class="text-sm font-bold">Password: admin123</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <script src="app.js"></script>
+</body>
+</html>
+
