@@ -16,6 +16,52 @@ const handleLogin = () => {
     }
 };
 
+// Fetch All Issues
+const loadIssues = async () => {
+    toggleLoading(true);
+    const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+    const data = await res.json();
+    allIssues = data.data;
+    displayIssues(allIssues);
+    toggleLoading(false);
+};
+
+// Display Issues in Cards
+const displayIssues = (issues) => {
+    const container = document.getElementById('issues-container');
+    const countElement = document.getElementById('issue-count');
+    container.innerHTML = '';
+    countElement.innerText = issues.length;
+
+    issues.forEach(issue => {
+        const isClosed = issue.status.toLowerCase() === 'closed';
+        const cardClass = isClosed ? 'card-closed' : 'card-open';
+        const statusIcon = isClosed ? './assets/Closed- Status .png' : './assets/Open-Status.png';
+        
+        const card = document.createElement('div');
+        card.className = `bg-white border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex flex-col justify-between ${cardClass}`;
+        card.onclick = () => showIssueDetails(issue.id);
+
+        card.innerHTML = `
+            <div>
+                <div class="flex justify-between items-start mb-2">
+                    <img src="${statusIcon}" class="w-5" alt="status">
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-600 uppercase">${issue.priority}</span>
+                </div>
+                <h3 class="font-bold text-sm text-gray-800 mb-1 line-clamp-1">${issue.title}</h3>
+                <p class="text-xs text-gray-500 mb-3 line-clamp-2">${issue.description}</p>
+                <div class="flex gap-2 mb-4">
+                    <span class="text-[10px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded font-bold uppercase">${issue.labels}</span>
+                </div>
+            </div>
+            <div class="border-t pt-3 flex flex-col gap-1">
+                <p class="text-[10px] text-gray-400 font-medium">#${issue.id} by ${issue.author}</p>
+                <p class="text-[10px] text-gray-400">${new Date(issue.createdAt).toLocaleDateString()}</p>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+};
 
 // Filter Functionality
 const filterIssues = (status) => {
@@ -36,6 +82,4 @@ const filterIssues = (status) => {
         displayIssues(filtered);
     }
 };
-
-
 

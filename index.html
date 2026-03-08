@@ -21,7 +21,9 @@
               font-family: "Geist", sans-serif;
         }
 
-        
+        .active-tab { background-color: #6366f1 !important; color: white !important; }
+        .card-open { border-top: 4px solid #22c55e; }
+        .card-closed { border-top: 4px solid #a855f7; }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -87,7 +89,13 @@
                         <p class="text-xs text-gray-500">Track and manage your project issues</p>
                     </div>
                 </div>
-                
+                <div class="flex gap-4 text-xs font-semibold">
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 bg-green-500 rounded-full"></span> Open</span>
+                    <span class="flex items-center gap-1"><span class="w-2 h-2 bg-purple-500 rounded-full"></span> Closed</span>
+                </div>
+            </div>
+
+           
         </main>
     </div>
 
