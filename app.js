@@ -97,7 +97,30 @@ const handleSearch = async () => {
     toggleLoading(false);
 };
 
+// Show Detailed Modal
+const showIssueDetails = async (id) => {
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const data = await res.json();
+    const issue = data.data;
 
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = `
+        <div class="flex items-center gap-2 mb-4">
+            <h2 class="text-2xl font-bold">${issue.title}</h2>
+            <span class="badge ${issue.status === 'open' ? 'badge-success' : 'badge-secondary'}">${issue.status}</span>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg mb-4">
+            <p class="text-gray-700">${issue.description}</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+            <p><strong>Author:</strong> ${issue.author}</p>
+            <p><strong>Priority:</strong> ${issue.priority}</p>
+            <p><strong>Label:</strong> ${issue.labels}</p>
+            <p><strong>Created:</strong> ${new Date(issue.createdAt).toLocaleString()}</p>
+        </div>
+    `;
+    document.getElementById('issue_modal').showModal();
+};
 
 // Utility: Loading Spinner
 const toggleLoading = (show) => {
