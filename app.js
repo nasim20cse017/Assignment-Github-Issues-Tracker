@@ -16,3 +16,26 @@ const handleLogin = () => {
     }
 };
 
+
+// Filter Functionality
+const filterIssues = (status) => {
+    currentFilter = status;
+    
+    // Update Tab UI
+    const tabs = ['all', 'open', 'closed'];
+    tabs.forEach(t => {
+        const btn = document.getElementById(`tab-${t}`);
+        if (t === status) btn.classList.add('active-tab');
+        else btn.classList.remove('active-tab');
+    });
+
+    if (status === 'all') {
+        displayIssues(allIssues);
+    } else {
+        const filtered = allIssues.filter(item => item.status.toLowerCase() === status);
+        displayIssues(filtered);
+    }
+};
+
+
+
