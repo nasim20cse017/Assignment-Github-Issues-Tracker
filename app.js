@@ -26,6 +26,8 @@ const loadIssues = async () => {
     toggleLoading(false);
 };
 
+
+
 // Display Issues in Cards
 const displayIssues = (issues) => {
     const container = document.getElementById('issues-container');
@@ -82,6 +84,19 @@ const filterIssues = (status) => {
         displayIssues(filtered);
     }
 };
+
+// Search Functionality
+const handleSearch = async () => {
+    const query = document.getElementById('search-input').value;
+    if (!query) return loadIssues();
+
+    toggleLoading(true);
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`);
+    const data = await res.json();
+    displayIssues(data.data);
+    toggleLoading(false);
+};
+
 
 
 // Utility: Loading Spinner
