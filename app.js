@@ -230,7 +230,7 @@ const showIssueDetails = async (id) => {
     document.getElementById("issue_modal").showModal();
 };
 
-// Utility: Loading Spinner
+// Loading Spinner
 const toggleLoading = (show) => {
     const spinner = document.getElementById('loading-spinner');
     const container = document.getElementById('issues-container');
