@@ -75,4 +75,12 @@ Advantages :
   i. Insert variables easily
   ii. Multi-line strings
   iii. Dynamic string creation
+
+Example :
+const name = "Nasim";
+const age = 25;
+const message = `My name is ${name} and I am ${age} years old`;
+console.log(message);
+
+Output : My name is Nasim and I am 25 years old
    
