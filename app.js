@@ -138,29 +138,96 @@ const handleSearch = async () => {
     toggleLoading(false);
 };
 
-// Show Detailed Modal
+
+// Show Detailed Modal 
 const showIssueDetails = async (id) => {
+
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
     const issue = data.data;
 
-    const modalBody = document.getElementById('modal-body');
+    // label badges
+    let labelsHTML = "";
+    issue.labels.forEach(label => {
+        labelsHTML += getLabelBadge(label);
+    });
+
+    // priority badge
+    const priorityBadge = getPriorityBadge(issue.priority);
+
+    const modalBody = document.getElementById("modal-body");
+
     modalBody.innerHTML = `
-        <div class="flex items-center gap-2 mb-4">
-            <h2 class="text-2xl font-bold">${issue.title}</h2>
-            <span class="badge ${issue.status === 'open' ? 'badge-success' : 'badge-secondary'}">${issue.status}</span>
+
+        <div class="space-y-4">
+
+            <!-- Title -->
+            <h2 class="text-2xl font-bold text-gray-800">
+                ${issue.title}
+            </h2>
+
+            <!-- Status Row -->
+            <div class="flex items-center gap-2 text-sm text-gray-500">
+
+                <span class="bg-green-600 text-white px-2 py-0.5 rounded-full text-xs font-semibold">
+                    Opened
+                </span>
+
+                <span>•</span>
+
+                <span>Opened by ${issue.author}</span>
+
+                <span>•</span>
+
+                <span>${new Date(issue.createdAt).toLocaleDateString()}</span>
+
+            </div>
+
+
+            <!-- Labels -->
+            <div class="flex gap-2 flex-wrap">
+                ${labelsHTML}
+            </div>
+
+
+            <!-- Description -->
+            <p class="text-gray-600 text-sm leading-relaxed">
+                ${issue.description}
+            </p>
+
+
+            <!-- Bottom Info Box -->
+            <div class="bg-gray-100 rounded-lg p-4 grid grid-cols-2 gap-4 text-sm">
+
+                <div>
+                    <p class="text-gray-500">Assignee:</p>
+                    <p class="font-semibold text-gray-800">
+                        ${issue.assignee ? issue.assignee : "Unassigned"}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-gray-500">Priority:</p>
+                    ${priorityBadge}
+                </div>
+
+            </div>
+
+
+            <!-- Close Button -->
+            <div class="flex justify-end pt-4">
+                <button 
+                    onclick="issue_modal.close()" 
+                    class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md font-medium">
+                    Close
+                </button>
+            </div>
+
         </div>
-        <div class="bg-gray-50 p-4 rounded-lg mb-4">
-            <p class="text-gray-700">${issue.description}</p>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-            <p><strong>Author:</strong> ${issue.author}</p>
-            <p><strong>Priority:</strong> ${issue.priority}</p>
-            <p><strong>Label:</strong> ${issue.labels}</p>
-            <p><strong>Created:</strong> ${new Date(issue.createdAt).toLocaleString()}</p>
-        </div>
+
     `;
-    document.getElementById('issue_modal').showModal();
+
+    document.getElementById("issue_modal").showModal();
 };
 
 // Utility: Loading Spinner

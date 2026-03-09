@@ -37,12 +37,12 @@
             <div class="space-y-4 text-left">
                 <div>
                     <label class="label text-sm font-semibold">Username</label>
-                    <input type="text" id="username" placeholder="Enter Username" class="input input-bordered w-full" value="admin">
+                    <input type="text" id="username" placeholder="Enter Username" class="input input-bordered w-full" value="">
                     <span class="text-xs text-blue-600">Default: admin</span>
                 </div>
                 <div>
                     <label class="label text-sm font-semibold">Password</label>
-                    <input type="password" id="password" placeholder="Enter Password" class="input input-bordered w-full" value="admin123">
+                    <input type="password" id="password" placeholder="Enter Password" class="input input-bordered w-full" value="">
                     <span class="text-xs text-blue-600">Default: admin123</span>
                 </div>
                 <button onclick="handleLogin()" class="btn bg-indigo-600 hover:bg-indigo-700 text-white w-full border-none">Sign In</button>
@@ -107,9 +107,6 @@
         <div class="modal-box max-w-2xl">
             <div id="modal-body"></div>
             <div class="modal-action">
-                <form method="dialog">
-                    <button class="btn">Close</button>
-                </form>
             </div>
         </div>
     </dialog>
